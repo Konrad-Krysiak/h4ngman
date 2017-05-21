@@ -1,5 +1,5 @@
 // VARIABLES
-var words = ["word", "password", "javascript", "keys", "konrad", "programming", "freestyle"];
+var words = ["word", "password", "few words more", "keys", "konrad", "programming", "football freestyle"];
 var hiddenWord = "";
 var fails = 5;
 var randomWord = words[Math.floor(Math.random()*words.length)].toUpperCase();
@@ -43,7 +43,12 @@ function checkletter(letter) {
 }
 
 function begin() {
-	for(x=1;x<=randomWord.length;x++) hiddenWord+= "-";
+	for(x=1;x<=randomWord.length;x++) 
+	{
+		if(randomWord.charAt(x-1) != " ") hiddenWord += "-";
+		else hiddenWord += " ";
+		
+	}
 	document.getElementById("top").innerHTML = hiddenWord;
 	document.getElementById("left").innerHTML = "Tries left: " + fails;
 }
