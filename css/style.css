@@ -78,13 +78,14 @@ span.letter {
 #form input[type="button"] {
     font-size: 25px;
     font-family: "Ubuntu", sans-serif;
-    background: #fff;
-    color: #000000;
+    background: transparent;
+    color: #ffffff;
 }
 #form input[type="button"]:hover {
     border: 2px solid #ffffff;
-    color: #ffffff;
-    background: #000000;
+    transition: .3s;
+    color: #000000;
+    background: #ffffff;
 }
 #form h1 {
     color: #ffffff;

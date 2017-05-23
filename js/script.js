@@ -48,7 +48,7 @@ function begin() {
     randomWord = document.getElementById("wordfield").value.toUpperCase();
     tip = document.getElementById("wordfield2").value;
     if(randomWord == "" || tip == "") {
-        alert("Fill both information fields!");
+        alert("You need to fill both fields!");
         return;
     }
     $("#hangman").css("display", "block");
