@@ -2,43 +2,104 @@
 <html lang="pl">
 <head>
 	<meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/script.js"></script>
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body onload="begin()">
-	<div id="container">
-		<div id="top"></div>
-		<div id="left"></div>
-		<div id="right">
-			<span class="letter" id="A" onclick="checkletter(this.id)">A</span>
-			<span class="letter" id="B" onclick="checkletter(this.id)">B</span>
-			<span class="letter" id="C" onclick="checkletter(this.id)">C</span>
-			<span class="letter" id="D" onclick="checkletter(this.id)">D</span>
-			<span class="letter" id="E" onclick="checkletter(this.id)">E</span>
-			<span class="letter" id="F" onclick="checkletter(this.id)">F</span>
-			<span class="letter" id="G" onclick="checkletter(this.id)">G</span>
-			<span class="letter" id="H" onclick="checkletter(this.id)">H</span>
-			<span class="letter" id="I" onclick="checkletter(this.id)">I</span>
-			<span class="letter" id="J" onclick="checkletter(this.id)">J</span>
-			<span class="letter" id="K" onclick="checkletter(this.id)">K</span>
-			<span class="letter" id="L" onclick="checkletter(this.id)">L</span>
-			<span class="letter" id="M" onclick="checkletter(this.id)">M</span>
-			<span class="letter" id="N" onclick="checkletter(this.id)">N</span>
-			<span class="letter" id="O" onclick="checkletter(this.id)">O</span>
-			<span class="letter" id="P" onclick="checkletter(this.id)">P</span>
-			<span class="letter" id="R" onclick="checkletter(this.id)">R</span>
-			<span class="letter" id="S" onclick="checkletter(this.id)">S</span>
-			<span class="letter" id="T" onclick="checkletter(this.id)">T</span>
-			<span class="letter" id="U" onclick="checkletter(this.id)">U</span>
-			<span class="letter" id="W" onclick="checkletter(this.id)">W</span>
-			<span class="letter" id="Y" onclick="checkletter(this.id)">Y</span>
-			<span class="letter" id="Z" onclick="checkletter(this.id)">Z</span>
-		</div>
-		<div class="clearfix"></div>
-		<div class="play-again" id="play-again">
-			<input type="submit" id="play-again" value="Play again!" onclick="refresh()">
-		</div>
-	</div>
+<body>
+    <div id="intro">
+        <div class="container wrapper1">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10 col-sm-12">
+                    <div id="form">
+                        <h1>Type word:</h1>
+                        <input type="text" id="wordfield" class="wordfield" />
+                        
+                        <h1>Type tip:</h1>
+                        <input type="text" id="wordfield2" class="wordfield2" />
+                        
+                        <h1></h1>
+                        <input type="button" class="wordbutton btn-lg" onclick="begin()" value="Start the game!"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div id="hangman">
+        <!-- WIN / LOSE GIF IMAGES RENDERING -->
+        <div class="won">
+            <img src="https://media.giphy.com/media/12gcFJY9LEi6zu/giphy.gif">
+        </div>
+        <div class="lost">
+            <img src="https://media.giphy.com/media/18yGZvOf5Fmes/giphy.gif">
+        </div>
+        <!--  --  -->
+        <div class="container wrapper2">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="tip"></div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div id="top"></div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div id="left"></div>
+                </div>
+                <div class="col-md-6">
+                    <div id="right">
+                        <span class="letter" id="A" onclick="checkletter(this.id)">A</span>
+                        <span class="letter" id="Ą" onclick="checkletter(this.id)">Ą</span>
+                        <span class="letter" id="B" onclick="checkletter(this.id)">B</span>
+                        <span class="letter" id="C" onclick="checkletter(this.id)">C</span>
+                        <span class="letter" id="Ć" onclick="checkletter(this.id)">Ć</span>
+                        <span class="letter" id="D" onclick="checkletter(this.id)">D</span>
+                        <span class="letter" id="E" onclick="checkletter(this.id)">E</span>
+                        <span class="letter" id="F" onclick="checkletter(this.id)">F</span>
+                        <span class="letter" id="G" onclick="checkletter(this.id)">G</span>
+                        <span class="letter" id="H" onclick="checkletter(this.id)">H</span>
+                        <span class="letter" id="I" onclick="checkletter(this.id)">I</span>
+                        <span class="letter" id="J" onclick="checkletter(this.id)">J</span>
+                        <span class="letter" id="K" onclick="checkletter(this.id)">K</span>
+                        <span class="letter" id="L" onclick="checkletter(this.id)">L</span>
+                        <span class="letter" id="Ł" onclick="checkletter(this.id)">Ł</span>
+                        <span class="letter" id="M" onclick="checkletter(this.id)">M</span>
+                        <span class="letter" id="N" onclick="checkletter(this.id)">N</span>
+                        <span class="letter" id="Ń" onclick="checkletter(this.id)">Ń</span>
+                        <span class="letter" id="O" onclick="checkletter(this.id)">O</span>
+                        <span class="letter" id="Ó" onclick="checkletter(this.id)">Ó</span>
+                        <span class="letter" id="P" onclick="checkletter(this.id)">P</span>
+                        <span class="letter" id="R" onclick="checkletter(this.id)">R</span>
+                        <span class="letter" id="S" onclick="checkletter(this.id)">S</span>
+                        <span class="letter" id="Ś" onclick="checkletter(this.id)">Ś</span>
+                        <span class="letter" id="T" onclick="checkletter(this.id)">T</span>
+                        <span class="letter" id="U" onclick="checkletter(this.id)">U</span>
+                        <span class="letter" id="W" onclick="checkletter(this.id)">W</span>
+                        <span class="letter" id="X" onclick="checkletter(this.id)">X</span>
+                        <span class="letter" id="Y" onclick="checkletter(this.id)">Y</span>
+                        <span class="letter" id="Z" onclick="checkletter(this.id)">Z</span>
+                        <span class="letter" id="Ź" onclick="checkletter(this.id)">Ź</span>
+                        <span class="letter" id="Ż" onclick="checkletter(this.id)">Ż</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <div class="play-again" id="play-again">
+                        <input type="submit" value="Play again!" onclick="refresh()">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
