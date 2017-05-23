@@ -1,9 +1,12 @@
 // VARIABLES
-var words = ["word", "password", "few words more", "keys", "konrad", "programming", "football freestyle"];
 var hiddenWord = "";
-var fails = 5;
-var randomWord = words[Math.floor(Math.random()*words.length)].toUpperCase();
+var fails = 0;
+window.onload = render;
 
+function render() {
+    $("#intro").css("display", "block");
+    $("#hangman").css("display", "none");
+}
 
 String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
@@ -15,40 +18,49 @@ function refresh() {
 
 function checkletter(letter) {
 	if(randomWord.indexOf(letter) == -1) {
-		fails--;
-		document.getElementById("left").innerHTML = "Tries left: " + fails;
+		fails++;
+        document.getElementById("left").innerHTML = "<img src=\"img/s"+fails+".jpg\" />";
 		document.getElementById(letter).style.color = "red";
 		$("#"+letter).css("pointer-events", "none");
-		if(fails==0) 
+        
+        // IF PLAYER LOSES
+		if(fails==9) 
 		{
-			alert('You lost! What a shame!');
-			document.getElementById("top").innerHTML =  randomWord;
-			$("span.letter").css("pointer-events", "none");
-			return;
+            $(".lost img").show();
+            return;
 		}
 	}
 	else {
 		for(var i=0; i<randomWord.length;i++) if (randomWord.charAt(i) === letter) 
-			hiddenWord = hiddenWord.replaceAt(i, letter);
+            hiddenWord = hiddenWord.replaceAt(i, letter);
 		document.getElementById("top").innerHTML =  hiddenWord;
 		$("#"+letter).css("pointer-events", "none");
 		document.getElementById(letter).style.color = "lime";
 	}
 
-	// IF PLAYER WINS THE GAME
+	// IF PLAYER WINS 
 	if(hiddenWord === randomWord)  {
-		alert("You won! Congratulations!");
-		$("span.letter").css("pointer-events", "none");
+        $(".won img").show();
 	}
 }
 
 function begin() {
+    randomWord = document.getElementById("wordfield").value.toUpperCase();
+    tip = document.getElementById("wordfield2").value;
+    if(randomWord == "" || tip == "") {
+        alert("Fill both information fields!");
+        return;
+    }
+    $("#hangman").css("display", "block");
+    $("#intro").css("display", "none");
 	for(x=1;x<=randomWord.length;x++) 
 	{
-		if(randomWord.charAt(x-1) != " ") hiddenWord += "-";
+		if(randomWord.charAt(x-1) != " ") 
+            hiddenWord += "-";
 		else hiddenWord += " ";
 		
 	}
+    document.getElementById("tip").innerHTML = "Tip: "+tip;
 	document.getElementById("top").innerHTML = hiddenWord;
-	document.getElementById("left").innerHTML = "Tries left: " + fails;
+    document.getElementById("left").innerHTML = "<img src=\"img/s0.jpg\" />";
 }
