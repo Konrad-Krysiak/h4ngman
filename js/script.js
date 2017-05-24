@@ -12,6 +12,10 @@ String.prototype.replaceAt=function(index, replacement) {
     return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
 }
 
+function hasNumber(myString) {
+  return /\d/.test(myString);
+}
+
 function refresh() {
 	location.reload();
 }
@@ -49,6 +53,11 @@ function begin() {
     tip = document.getElementById("wordfield2").value;
     if(randomWord == "" || tip == "") {
         alert("You need to fill both fields!");
+        return;
+    }
+    else if(hasNumber(randomWord))
+        {
+        alert("Word can not contain numbers!");
         return;
     }
     $("#hangman").css("display", "block");
