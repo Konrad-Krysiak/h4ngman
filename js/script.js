@@ -1,75 +1,104 @@
-// VARIABLES
-var hiddenWord = "";
-var fails = 0;
-window.onload = render;
+(function ( $ ) {
+    "use strict";
+    // VARIABLES
+    var hiddenWord = "",
+        fails = 0,
+        randomWord,
+        tip,
+        begin = function() {
+            randomWord = $("#wordfield").val().toUpperCase();
+            tip = $("#wordfield2").val();
 
-function render() {
-    $("#intro").css("display", "block");
-    $("#hangman").css("display", "none");
-}
+            if(randomWord === "" || tip === "") {
+                $(".alert_box").text("You need to fill both fields!").show();
+                return;
+            }
+            else if(hasNumber(randomWord))
+                {
+                $(".alert_box").text("Word can not contain numbers!").show();
+                return;
+            }
+            roll();
+            for(var x=1;x<=randomWord.length;x++) {
+                if (randomWord.charAt(x-1) != " ") {
+                    hiddenWord += "-";
+                }
+                else {
+                   hiddenWord += " ";  
+                }
+            }
 
-String.prototype.replaceAt=function(index, replacement) {
-    return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
-}
+            $("#tip").text("Tip: "+tip);
+            $("#top").text(hiddenWord);
+            $("#left").html("<img src=\"img/s0.jpg\"/>");
+        },
+        checkletter = function(letter) {
+            if(randomWord.indexOf(letter) == -1) {
+                fails++;
+                $("#left").html("<img src=\"img/s"+fails+".jpg\" />");
+                $("#"+letter).css("color", "red");
+                $("#"+letter).css("pointer-events", "none");
 
-function hasNumber(myString) {
-  return /\d/.test(myString);
-}
+                // IF PLAYER LOSES
+                if(fails==9) {
+                    $(".layer").show();
+                    $(".Lbanner").css("display", "flex");
+                    return;
+                }
+            }
+            else {
+                for(var i=0; i<randomWord.length;i++) if (randomWord.charAt(i) === letter) {
+                    hiddenWord = hiddenWord.replaceAt(i, letter);
+                }
 
-function refresh() {
-	location.reload();
-}
+                $("#top").html(hiddenWord);
+                $("#"+letter).css("pointer-events", "none");
+                $("#"+letter).css("color", "lime");
+            }
 
-function checkletter(letter) {
-	if(randomWord.indexOf(letter) == -1) {
-		fails++;
-        document.getElementById("left").innerHTML = "<img src=\"img/s"+fails+".jpg\" />";
-		document.getElementById(letter).style.color = "red";
-		$("#"+letter).css("pointer-events", "none");
-        
-        // IF PLAYER LOSES
-		if(fails==9) 
-		{
-            $(".lost img").show();
-            return;
-		}
-	}
-	else {
-		for(var i=0; i<randomWord.length;i++) if (randomWord.charAt(i) === letter) 
-            hiddenWord = hiddenWord.replaceAt(i, letter);
-		document.getElementById("top").innerHTML =  hiddenWord;
-		$("#"+letter).css("pointer-events", "none");
-		document.getElementById(letter).style.color = "lime";
-	}
+            // IF PLAYER WINS 
+            if(hiddenWord === randomWord)  {
+                $(".layer").show();
+                $(".Wbanner").css("display", "flex");
+            }
+        },
+        roll = function() {
+            $("#intro, #hangman").animate({
+                bottom: "100vh"
+            }, 1000);
+        },
+        refresh = function() {
+            location.reload();
+        },
+        hasNumber = function(myString) {
+          return /\d/.test(myString);
+        };
 
-	// IF PLAYER WINS 
-	if(hiddenWord === randomWord)  {
-        $(".won img").show();
-	}
-}
-
-function begin() {
-    randomWord = document.getElementById("wordfield").value.toUpperCase();
-    tip = document.getElementById("wordfield2").value;
-    if(randomWord == "" || tip == "") {
-        alert("You need to fill both fields!");
-        return;
+    String.prototype.replaceAt = function(index, replacement) {
+        return this.substr(0, index) + replacement+ this.substr(index + replacement.length);
     }
-    else if(hasNumber(randomWord))
-        {
-        alert("Word can not contain numbers!");
-        return;
+
+//-------------
+    
+    
+    
+    for (let item of $("#right span")) {
+        item.addEventListener("click", function () {
+            let text = $(this).text();
+            $(this).attr("id", text);
+            checkletter(text);
+        });
     }
-    $("#hangman").css("display", "block");
-    $("#intro").css("display", "none");
-	for(x=1;x<=randomWord.length;x++) 
-	{
-		if(randomWord.charAt(x-1) != " ") 
-            hiddenWord += "-";
-		else hiddenWord += " ";
-		
-	}
-    document.getElementById("tip").innerHTML = "Tip: "+tip;
-	document.getElementById("top").innerHTML = hiddenWord;
-    document.getElementById("left").innerHTML = "<img src=\"img/s0.jpg\" />";
-}
+
+    $(".button_start").click(function() {
+        begin();
+    });
+    
+    $(".alert_box").click(function() {
+        $(this).hide();
+    });
+
+    $("#ref").click(function() {
+        refresh();
+    });
+}( jQuery ));

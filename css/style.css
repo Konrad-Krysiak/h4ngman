@@ -1,35 +1,86 @@
 @import url('https://fonts.googleapis.com/css?family=Barrio|Ubuntu');
 body {
-	background: #000000;
-	color: #fff;
-	overflow-x:hidden;
+    background: #000;
+	color: #000;
+    overflow: hidden;
 }
-#container {
-	margin: 0 auto;
-	width: 900px;
-	padding: 20px 0;
+.intro {
+    background:
+    linear-gradient(135deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px),
+    linear-gradient(225deg, #708090 22px, #d9ecff 22px, #d9ecff 24px, transparent 24px, transparent 67px, #d9ecff 67px, #d9ecff 69px, transparent 69px)0 64px;
+    background-color:#708090;
+    background-size: 64px 128px;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: relative;
+
 }
+
+
+.alert_box {
+    position: absolute;
+    top: 5%;
+    font-size: 40px;
+    font-family: "Ubuntu", sans-serif;
+    color: red;
+    background: rgba(255,255,255,.85);
+    display: none;
+    padding: 0 20px;
+    border-radius: 1rem;
+}
+.form {
+    background: rgba(255,255,255,.85);
+    padding: 30px;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.hangman {
+    background: #000;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    color: #fff;
+}
+
+.tip {
+    margin-top: 10px;
+    padding: 10px 0 10px 20px;
+    font-size: 25px;
+    font-family: "Ubuntu", sans-serif;
+    font-weight: bold;
+    border-left:1px solid #fff;
+    border-bottom:1px solid #fff;
+}
+
 #top {
-	margin: 30px 0;
-	text-align: center;
+    width: 100%;
+    text-align: center;
 	font-size: 50px;
 	font-family: "Barrio", sans-serif;
 	text-transform: uppercase;
-	letter-spacing: 5px;
-    padding: 20px;
+
 }
 #left {
 	text-align: center;
 	padding: 50px;
 	font-size: 60px;
 }
-#right {
+.right {
     padding: 20px;
     border-radius: 2px;
 }
 
-.letter{
+.right > *{
 	width: 100px;
 	border-radius: 5px;
 	font-size: 30px;
@@ -47,23 +98,79 @@ span.letter {
 	text-align: center;
 	padding: 50px;
 }
-.play-again input[type="submit"] {
+
+
+.layer {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, .8);
+    display: none;
+}
+
+
+.Wbanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 50%;
+    height: 50%;
+    background: rgba(0, 0, 0, .8);
+    color: lime;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Ubuntu", sans-serif;
+    border: 1px solid white;
+    border-radius: 1rem;
+    display: none;
+}
+
+.Lbanner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    width: 50%;
+    height: 50%;
+    background: rgba(0, 0, 0, .8);
+    color: red;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Ubuntu", sans-serif;
+    border: 1px solid white;
+    border-radius: 1rem;
+    display: none;
+}
+
+.Wbanner h1, .Lbanner h1{
+    font-size: 75px;
+}
+
+
+.ref {
 	width: 200px;
 	height: 50px;
-	background: white;
+	background: transparent;
+    color: #fff;
+    border: 1px dotted white;
+    border-radius: 1rem;
 	font-size: 30px;
 	font-family: "Ubuntu", sans-serif;
-	cursor: pointer;
     position: relative;
     z-index: 9999;
+    text-align: center;
+    transition: .3s;
 }
-.play-again input {
-	background: #ffffff;
-	color: #000000;
-}
-.play-again input:hover {
-	background: #000000;
-	color: #ffffff;
+.ref:hover {
+	background: #fff;
+	color: #000;
 }
 
 #form input[type="text"] {
@@ -71,55 +178,25 @@ span.letter {
     border-radius: 15px;
     text-align: center;
     color: #000000;
+    border-color: #000;
 }
 .wordfield {
     text-transform: uppercase;
 }
-#form input[type="button"] {
+.button_start {
     font-size: 25px;
     font-family: "Ubuntu", sans-serif;
-    background: transparent;
-    color: #ffffff;
+    background: #fff;
+    color: #000;
 }
-#form input[type="button"]:hover {
-    border: 2px solid #ffffff;
+.button_start:hover {
     transition: .3s;
     color: #000000;
     background: #ffffff;
 }
 #form h1 {
-    color: #ffffff;
+    color: #000;
     font-size: 50px;
     font-family: "Ubuntu", sans-serif;
     padding: 20px;
-}
-.wrapper1 {
-    padding: 150px 0;
-    text-align: center;
-}
-.wrapper2 {
-    padding: 50px 0;
-}
-#tip {
-    font-size: 25px;
-    font-family: "Ubuntu", sans-serif;
-    font-weight: bold;
-}
-.won img {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 999;
-    display: none;
-}
-.lost img {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
-    z-index: 999;
-    display: none;
 }
